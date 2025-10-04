@@ -1,0 +1,26 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS Habits (
+  Id INTEGER PRIMARY KEY AUTOINCREMENT,
+  Title TEXT NOT NULL,
+  Description TEXT,
+  IsPositive INTEGER NOT NULL DEFAULT 1,
+  TrackType INTEGER NOT NULL,
+  TargetValue REAL NULL,
+  CreatedAt TEXT NOT NULL,
+  UpdatedAt TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS HabitEntries (
+  Id INTEGER PRIMARY KEY AUTOINCREMENT,
+  HabitId INTEGER NOT NULL,
+  Date TEXT NOT NULL,
+  Completed INTEGER NOT NULL DEFAULT 0,
+  NumericValue REAL NULL,
+  DurationSeconds INTEGER NULL,
+  Note TEXT NULL,
+  CreatedAt TEXT NOT NULL,
+  FOREIGN KEY (HabitId) REFERENCES Habits(Id) ON DELETE CASCADE
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_habitentry_habitid_date ON HabitEntries(HabitId, Date);
