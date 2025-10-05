@@ -443,7 +443,10 @@ namespace MyHabitsTracker
          */
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Export to CSV feature will be implemented later.", "CSV", MessageBoxButton.OK, MessageBoxImage.Information);
+            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string file = System.IO.Path.Combine(desktop, "mht_export.csv");
+            string resultPath = _habitService.ExportAllCsv(file);
+            MessageBox.Show("Exported to: " + resultPath, "Export", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /**
