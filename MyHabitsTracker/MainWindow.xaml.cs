@@ -169,8 +169,8 @@ namespace MyHabitsTracker
                 List<HabitEntry> entries = _habitService.GetEntriesForHabit(h.Id, fromDate, toDate);
                 
                 //TODO: calculate Streak                
-                int current = 0;
-                int best = 0;
+                int current = StreakCalculator.CalculateCurrentStreak(h, entries);
+                int best = StreakCalculator.CalculateBestStreak(h, entries);
 
                 HabitRow row = new HabitRow();
                 row.Id = h.Id;
